@@ -97,12 +97,11 @@ for call_record in calls:
         elif is_telemarketer_number(called_to_number):
             area_code_list.append('140')
 
-# I am assuming here that we do not require the area codes to be unique so I am avoiding using set.
 area_code_list = sorted(area_code_list)
 
 print('The numbers called by people in Bangalore have codes:')
 
-for area_code in area_code_list:
+for area_code in set(area_code_list):
     print(area_code)
 
 print(
