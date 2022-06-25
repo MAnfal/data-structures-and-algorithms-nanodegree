@@ -20,3 +20,12 @@ Print a message:
 September 2016.".
 """
 
+longest_call_record = None
+
+for call_record in calls:
+    call_record[3] = int(call_record[3])
+
+    if longest_call_record is None or longest_call_record[3] < call_record[3]:
+        longest_call_record = call_record
+
+print("{} spent the longest time, {} seconds, on the phone during {}".format(longest_call_record[1], longest_call_record[3], longest_call_record[2]))

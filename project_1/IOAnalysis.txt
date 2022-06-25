@@ -1,0 +1,16 @@
+Telephone numbers are either 10 or 11 digits long.
+
+3 different types of numbers.
+
+1. Fixed lines start with an area code enclosed in brackets. The area codes vary in length but always begin with 0. Example: "(022)40840621".
+2. Mobile numbers have no parentheses, but have a space in the middle of the number to help readability. The mobile code of a mobile number is its first four digits and they always start with 7, 8 or 9. Example: "93412 66159".
+3. Telemarketers' numbers have no parentheses or space, but start with the code 140. Example: "1402316533".
+
+
+Our analysis.
+
+The division can be made on the following.
+
+1. if the number has (), it is a fixed number with area code. The area code always begins with 0.
+2. if the number has space, it's a mobile number with first 4 digits representing mobile code starting with 7, 8 or 9.
+3. if the number has no paranthesis or space, it is a telemarketer number. It will always start with 140.
