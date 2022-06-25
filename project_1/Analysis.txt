@@ -1,0 +1,53 @@
+Assumption: For all the tasks, big-o will only consider the implemented solution and will avoid the CSV reading part.
+
+Task 0
+
+Complexity: O(1)
+
+This task is specifically getting the values on certain indices. Len in python is in O(1) and we are not performing
+any operation inside a loop.
+
+
+Task 1
+
+Complexity: O(n^2)
+
+Searching in dict: O(n) for worst case according to python docs.
+Looping our dataset: O(n). Since we have 2 loops that are in sequence.
+
+Since the searching in dict is happening inside the loop, we will have to consider it being a n^2 scenario. The final worst
+case can be calculates as follows.
+
+O = n^2 + n^2 = 2n^2 or O(n^2).
+
+
+Task 2
+
+Complexity: O(n)
+
+The only time consuming case in this task is the loop over the records. In worst case, the longest value can be at the end
+of the list. Everything else is an O(1).
+
+
+Task 3
+
+Complexity
+O(n^2) (for record iteration and internal checks for each phone number) +
+O(n log n) (for sorted call) +
+O(n) (for conversion to set for distinct values) +
+O(n) (for looping over to print result)
+
+Final: O(n^2) + O(n log n) + O(n) + O(n) = O(n^2)
+
+The complexity here is O(n) because that is the biggest factor of all.
+
+
+Task 4
+
+Complexity
+O(n^2) (for first iteration + call matching for each number) +
+O(n^2) (for second iteration) +
+O(n log n) for sorted call +
+O(n) for final result printing.
+
+Final: O(n^2) + O(n^2) + O(n log n) + O(n) = O(n^2)
