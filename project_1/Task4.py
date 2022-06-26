@@ -26,31 +26,25 @@ The list of numbers should be print out one per line in lexicographic order with
 """
 
 # Assumptions
-# 1. Number is a telemarketer number so it'll start with 140, have no () and no spaces.
-# 2. It won't send/receive texts so we only have to look in the calls CSV.
-# 3. If in the calls CSV we found out that a certain number had a call made to but was telemarketer, remove that from our results.
+# 1. It won't send/receive texts so we only have to look in the calls CSV.
+# 2. If in the calls CSV we found out that a certain number had a call made to but was telemarketer, remove that from our results.
 
 
 telemarketer_dictionary = {}
 
-
-def is_telemarketer_number(phone_number):
-    return '(' not in phone_number and \
-           ')' not in phone_number and \
-           ' ' not in phone_number and \
-           phone_number[:3] == '140'
-
-
+# First of all, we will format the entire list into a dictionary to prep for the next step.
 for call_record in calls:
     calling_number = call_record[0]
 
-    if is_telemarketer_number(calling_number) and calling_number not in telemarketer_dictionary:
+    if calling_number not in telemarketer_dictionary:
         telemarketer_dictionary[calling_number] = 1
 
+# Now, we will exclude the numbers from this dictionary that were on the receiving end of call. They are not supposed
+# to receive calls.
 for call_record in calls:
     called_to_number = call_record[1]
 
-    if is_telemarketer_number(called_to_number) and called_to_number in telemarketer_dictionary:
+    if called_to_number in telemarketer_dictionary:
         del telemarketer_dictionary[called_to_number]
 
 print('These numbers could be telemarketers: ')
