@@ -97,14 +97,12 @@ for call_record in calls:
         elif is_telemarketer_number(called_to_number):
             area_code_list.append('140')
 
-area_code_list = sorted(area_code_list)
-
 print('The numbers called by people in Bangalore have codes:')
 
-for area_code in set(area_code_list):
+for area_code in sorted(set(area_code_list)):
     print(area_code)
 
 print(
     '\n{:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.'
-    .format((calls_made_to_fixed_lines_in_bangalore / len(area_code_list) * 100))
+    .format((calls_made_to_fixed_lines_in_bangalore / len(area_code_list)) * 100)
 )

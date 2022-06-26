@@ -48,7 +48,8 @@ Task 4
 Complexity
 O(n^2) (for first iteration + worst case of dict search is O(n)) +
 O(n^2) (for second iteration + worst case of dict search is O(n)) +
+O(n^2) (for iteration + checking the number existence in the dictionary) +
 O(n log n) for sorted call +
 O(n) for final result printing.
 
-Final: O(n^2) + O(n^2) + O(n log n) + O(n) = O(n^2)
+Final: O(n^2) + O(n^2) + O(n^2) + O(n log n) + O(n) = O(n^2)

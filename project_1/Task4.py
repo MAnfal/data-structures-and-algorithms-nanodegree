@@ -25,10 +25,6 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
-# Assumptions
-# 1. It won't send/receive texts so we only have to look in the calls CSV.
-# 2. If in the calls CSV we found out that a certain number had a call made to but was telemarketer, remove that from our results.
-
 
 telemarketer_dictionary = {}
 
@@ -37,7 +33,7 @@ for call_record in calls:
     calling_number = call_record[0]
 
     if calling_number not in telemarketer_dictionary:
-        telemarketer_dictionary[calling_number] = 1
+        telemarketer_dictionary[calling_number] = None
 
 # Now, we will exclude the numbers from this dictionary that were on the receiving end of call. They are not supposed
 # to receive calls.
@@ -46,6 +42,17 @@ for call_record in calls:
 
     if called_to_number in telemarketer_dictionary:
         del telemarketer_dictionary[called_to_number]
+
+for text_record in texts:
+    text_sending_number = text_record[0]
+    text_receiving_number = text_record[1]
+
+    if text_sending_number in telemarketer_dictionary:
+        del telemarketer_dictionary[text_sending_number]
+
+    if text_receiving_number in telemarketer_dictionary:
+        del telemarketer_dictionary[text_receiving_number]
+
 
 print('These numbers could be telemarketers: ')
 
