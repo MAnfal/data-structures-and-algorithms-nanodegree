@@ -33,10 +33,10 @@ def find_files(suffix, path):
 
 
 # Test Case 1
-print(find_files('.c', './testdir'))
+print(find_files('.c', './testdir')) # ['./testdir/subdir5/a.c', './testdir/subdir3/subsubdir1/b.c', './testdir/subdir1/a.c', './testdir/t1.c']
 
 # Test Case 2
-print(find_files('.h', './testdir'))
+print(find_files('.h', './testdir')) # ['./testdir/subdir5/a.h', './testdir/t1.h', './testdir/subdir3/subsubdir1/b.h', './testdir/subdir1/a.h']
 
 # Test Case 3
-print(find_files('.c', ''))
+print(find_files('.c', '')) # []

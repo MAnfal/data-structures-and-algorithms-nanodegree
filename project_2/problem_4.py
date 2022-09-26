@@ -42,8 +42,8 @@ def is_user_in_group(_user, _group):
 
 
 # Test Case 1
-print(is_user_in_group('sub_child_user', parent))
+print(is_user_in_group('sub_child_user', parent)) # True
 # Test Case 2
-print(is_user_in_group(None, parent))
+print(is_user_in_group(None, parent)) # False
 # Test Case 3
-print(is_user_in_group(124234, parent))
+print(is_user_in_group(124234, parent)) # False

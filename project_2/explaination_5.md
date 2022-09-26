@@ -1,0 +1,3 @@
+In this unique blockchain instead of maintaining a head then a pointer within every node to the next node, we are going to only point to just 1 node with a pointer called last and on insertion, we are going to replace the old value on this pointer with a new node that will contain the previous value inside of it. This will ensure that our insert operation is always O(1)
+
+Time complexity for appending a block is O(1) and space complexity is O(n) which is total space that is occupied by blockchain.

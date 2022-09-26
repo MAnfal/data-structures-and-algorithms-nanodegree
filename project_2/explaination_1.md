@@ -1,0 +1,3 @@
+We are using ordered dict since it retains the order of insertion of items. If a get call is made on key we check if value exists and return -1 or the value + move the value to the top of dict. If the set is called, we check if cache it at max capacity and decide whether to remove the oldest value (the first value) or just insert the new value.
+
+Time complexity of get() is O(1) and of set() is O(1). Space complexity of the LRU Cache is O(n).
