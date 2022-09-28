@@ -22,18 +22,29 @@ class Block:
 
 class LinkedList:
     def __init__(self):
-        self.head = None
         self.last = None
 
     def append(self, data):
         timestamp = datetime.datetime.utcnow().strftime("%d/%m/%Y %H:%M:%S")
 
-        if not self.head:
-            self.head = Block(timestamp, data, 0)
-            self.last = self.head
+        if not self.last:
+            self.last = Block(timestamp, data, 0)
         else:
             temp_data = self.last
             self.last = Block(timestamp, data, temp_data)
+
+
+def print_block_value(block):
+    if block:
+        print('---------------------------------------------------------------------------------------------')
+        print('Timestamp: {0}'.format(block.timestamp))
+        print('Data: {0}'.format(block.data))
+        print('SHA256 Hash: {0}'.format(block.hash))
+
+        previous_hash = block.previous_hash.hash if block.previous_hash else block.previous_hash
+
+        print('Previous Hash: {0}'.format(previous_hash))
+        print('---------------------------------------------------------------------------------------------')
 
 
 # linked list
@@ -41,5 +52,12 @@ linked_list = LinkedList()
 linked_list.append("Information A")
 linked_list.append("Information B")
 
-print("Linked list last data : ", linked_list.last.data)
-print("Linked list last's previous hash data : ", linked_list.last.previous_hash.data)
+# Print out the results.
+current_block = linked_list.last
+
+print_block_value(current_block)
+
+while current_block.previous_hash:
+    current_block = current_block.previous_hash
+
+    print_block_value(current_block)

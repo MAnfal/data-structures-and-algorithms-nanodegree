@@ -56,11 +56,12 @@ def convert_list_to_set(llist, _set=None):
 
     temp_head = llist.head
 
-    _set.add(temp_head.value)
-
-    while temp_head.next:
-        temp_head = temp_head.next
+    if temp_head:
         _set.add(temp_head.value)
+
+        while temp_head.next:
+            temp_head = temp_head.next
+            _set.add(temp_head.value)
 
     return _set
 
@@ -82,17 +83,30 @@ def intersection(llist_1, llist_2):
         if item_1 in _set_2:
             _final_set.add(item_1)
 
-    return convert_list_linked_list(_final_set)
+    return convert_list_linked_list(_final_set) if _final_set else 'No intersection found.'
 
 
 linked_list_1 = convert_list_linked_list([3, 2, 4, 35, 6, 65, 6, 4, 3, 21])
 linked_list_2 = convert_list_linked_list([6, 32, 4, 9, 6, 1, 11, 21, 1])
 
-print(union(linked_list_1, linked_list_2)) # 32 -> 65 -> 2 -> 35 -> 3 -> 4 -> 6 -> 1 -> 9 -> 11 -> 21 ->
-print(intersection(linked_list_1, linked_list_2)) # 4 -> 21 -> 6 ->
+print(union(linked_list_1, linked_list_2))
+print(intersection(linked_list_1, linked_list_2))
 
-linked_list_3 = convert_list_linked_list([3, 2, 4, 35, 6, 65, 6, 4, 3, 23]) # 65 -> 2 -> 35 -> 3 -> 4 -> 6 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 -> 23 ->
-linked_list_4 = convert_list_linked_list([1, 7, 8, 9, 11, 21, 1]) # ''
+linked_list_3 = convert_list_linked_list([3, 2, 4, 35, 6, 65, 6, 4, 3, 23])
+linked_list_4 = convert_list_linked_list([1, 7, 8, 9, 11, 21, 1])
 
 print(union(linked_list_3, linked_list_4))
 print(intersection(linked_list_3, linked_list_4))
+
+# Additional test cases
+llist_5 = convert_list_linked_list([])
+llist_6 = convert_list_linked_list([1, 7, 8, 9, 11, 21, 1])
+
+print(union(llist_5, llist_6))
+print(intersection(llist_5, llist_6))
+
+llist_7 = convert_list_linked_list([1, 1, 1, 2, 2, 2, 3, 3, 3])
+llist_8 = convert_list_linked_list([3, 3, 1, 1, 2, 2])
+
+print(union(llist_7, llist_8))
+print(intersection(llist_7, llist_8))

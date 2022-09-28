@@ -33,3 +33,13 @@ our_cache.set(2, 2)
 print(our_cache.get(1))  # returns 1
 print(our_cache.get(2))  # returns 2
 print(our_cache.get(3))  # return -1
+
+# Additional test cases
+
+print(our_cache.get(5))  # return -1
+print(our_cache.get(6))  # return -1
+
+our_cache.set(7, 1234)
+our_cache.set(8, 123)
+our_cache.set(6, 101)  # least recently used not deleted
+our_cache.set(3, 900)

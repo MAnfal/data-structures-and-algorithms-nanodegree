@@ -38,21 +38,29 @@ def huffman_decoding(_data, _charm_map):
     return decoded_str
 
 
-# tests
-if __name__ == "__main__":
-    codes = {}
+def print_results(sentence):
+    if sentence:
+        print("The size of the data is: {}\n".format(sys.getsizeof(sentence)))
+        print("The content of the data is: {}\n".format(sentence))
 
-    a_great_sentence = "The bird is the word"
+        encoded_data, charm_map = huffman_encoding(sentence)
 
-    print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print("The content of the data is: {}\n".format(a_great_sentence))
+        print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+        print("The content of the encoded data is: {}\n".format(encoded_data))
 
-    encoded_data, charm_map = huffman_encoding(a_great_sentence)
+        decoded_data = huffman_decoding(encoded_data, charm_map)
 
-    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print("The content of the encoded data is: {}\n".format(encoded_data))
+        print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+        print("The content of the encoded data is: {}\n".format(decoded_data))
+    else:
+        print('Empty string supplied.')
 
-    decoded_data = huffman_decoding(encoded_data, charm_map)
 
-    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print("The content of the encoded data is: {}\n".format(decoded_data))
+# Tests
+print_results('The bird is the word')
+
+print_results('aaaaaaaaaaaaaa')
+
+print_results('')
+
+print_results('a')
