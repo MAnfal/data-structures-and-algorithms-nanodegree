@@ -1,112 +1,46 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-
-    def __repr__(self):
-        return str(self.value)
+import collections
 
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
+class LRUCache(object):
 
-    def __str__(self):
-        cur_head = self.head
-        out_string = ""
-        while cur_head:
-            out_string += str(cur_head.value) + " -> "
-            cur_head = cur_head.next
-        return out_string
+    def __init__(self, capacity):
+        self._capacity = capacity
+        self._cache = collections.OrderedDict()
 
-    def append(self, value):
+    def get(self, key):
+        try:
+            value = self._cache.pop(key)
+            self._cache[key] = value
+            return value
+        except KeyError:
+            return -1
 
-        if self.head is None:
-            self.head = Node(value)
-            return
+    def set(self, key, value):
+        if value is not None:
+            try:
+                self._cache.pop(key)
+            except KeyError:
+                if len(self._cache) >= self._capacity:
+                    self._cache.popitem(last=False)
 
-        node = self.head
-        while node.next:
-            node = node.next
-
-        node.next = Node(value)
-
-    def size(self):
-        size = 0
-        node = self.head
-        while node:
-            size += 1
-            node = node.next
-
-        return size
+            self._cache[key] = value
 
 
-def convert_list_linked_list(_list):
-    _llist = LinkedList()
+our_cache = LRUCache(5)
 
-    for item in _list:
-        _llist.append(item)
+our_cache.set(1, 1)
+our_cache.set(2, 2)
+our_cache.set(7, 1234)
+our_cache.set(8, 123)
+our_cache.set(6, 101)  # least recently used not deleted
+our_cache.set(3, 900)
+our_cache.set(10, None)
 
-    return _llist
-
-
-def convert_list_to_set(llist, _set=None):
-    if _set is None:
-        _set = set()
-
-    temp_head = llist.head
-
-    if temp_head:
-        _set.add(temp_head.value)
-
-        while temp_head.next:
-            temp_head = temp_head.next
-            _set.add(temp_head.value)
-
-    return _set
-
-
-def union(llist_1, llist_2):
-    union_set = convert_list_to_set(llist_1)
-    union_set = convert_list_to_set(llist_2, union_set)
-
-    return convert_list_linked_list(union_set)
-
-
-def intersection(llist_1, llist_2):
-    _set_1 = convert_list_to_set(llist_1)
-    _set_2 = convert_list_to_set(llist_2)
-
-    _final_set = set()
-
-    for item_1 in _set_1:
-        if item_1 in _set_2:
-            _final_set.add(item_1)
-
-    return convert_list_linked_list(_final_set) if _final_set else 'No intersection found.'
-
-
-linked_list_1 = convert_list_linked_list([3, 2, 4, 35, 6, 65, 6, 4, 3, 21])
-linked_list_2 = convert_list_linked_list([6, 32, 4, 9, 6, 1, 11, 21, 1])
-
-print(union(linked_list_1, linked_list_2))
-print(intersection(linked_list_1, linked_list_2))
-
-linked_list_3 = convert_list_linked_list([3, 2, 4, 35, 6, 65, 6, 4, 3, 23])
-linked_list_4 = convert_list_linked_list([1, 7, 8, 9, 11, 21, 1])
-
-print(union(linked_list_3, linked_list_4))
-print(intersection(linked_list_3, linked_list_4))
+print(our_cache.get(1))  # returns -1 because it got popped out since it was not used and more values were introduced.
+print(our_cache.get(2))  # returns 2
+print(our_cache.get(3))  # return 900
 
 # Additional test cases
-llist_5 = convert_list_linked_list([])
-llist_6 = convert_list_linked_list([1, 7, 8, 9, 11, 21, 1])
-
-print(union(llist_5, llist_6))
-print(intersection(llist_5, llist_6))
-
-llist_7 = convert_list_linked_list([1, 1, 1, 2, 2, 2, 3, 3, 3])
-llist_8 = convert_list_linked_list([3, 3, 1, 1, 2, 2])
-
-print(union(llist_7, llist_8))
-print(intersection(llist_7, llist_8))
+print(our_cache.get(5))  # return -1
+print(our_cache.get(6))  # return 101
+print(our_cache.get(10))  # return -1

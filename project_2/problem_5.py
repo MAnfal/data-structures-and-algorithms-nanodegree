@@ -25,13 +25,14 @@ class LinkedList:
         self.last = None
 
     def append(self, data):
-        timestamp = datetime.datetime.utcnow().strftime("%d/%m/%Y %H:%M:%S")
+        if data:
+            timestamp = datetime.datetime.utcnow().strftime("%d/%m/%Y %H:%M:%S")
 
-        if not self.last:
-            self.last = Block(timestamp, data, 0)
-        else:
-            temp_data = self.last
-            self.last = Block(timestamp, data, temp_data)
+            if not self.last:
+                self.last = Block(timestamp, data, 0)
+            else:
+                temp_data = self.last
+                self.last = Block(timestamp, data, temp_data)
 
 
 def print_block_value(block):
@@ -49,8 +50,24 @@ def print_block_value(block):
 
 # linked list
 linked_list = LinkedList()
+
+# Test case 1
 linked_list.append("Information A")
+
+# Test case 2
 linked_list.append("Information B")
+
+# Test case 3
+linked_list.append("Information C")
+
+# Test case 4
+linked_list.append(None)
+
+# Test case 5
+linked_list.append(131231313)
+
+# Test case 6
+linked_list.append('')
 
 # Print out the results.
 current_block = linked_list.last
@@ -61,3 +78,33 @@ while current_block.previous_hash:
     current_block = current_block.previous_hash
 
     print_block_value(current_block)
+
+
+'''
+Output
+
+---------------------------------------------------------------------------------------------
+Timestamp: 28/09/2022 07:25:21
+Data: 131231313
+SHA256 Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+Previous Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+Timestamp: 28/09/2022 07:25:21
+Data: Information C
+SHA256 Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+Previous Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+Timestamp: 28/09/2022 07:25:21
+Data: Information B
+SHA256 Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+Previous Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+Timestamp: 28/09/2022 07:25:21
+Data: Information A
+SHA256 Hash: a20200a94c75010576e2d6a83e6fa69271901a9d805894b28bd91e6054fbfd10
+Previous Hash: 0
+---------------------------------------------------------------------------------------------
+'''
