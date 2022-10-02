@@ -38,10 +38,11 @@ class Router:
         self.trie.insert(parts, handler)
 
     def lookup(self, path):
-        parts = self.split_path(path)
-        node = self.trie.find(parts)
-        if node and node.handler:
-            return node.handler
+        if path:
+            parts = self.split_path(path)
+            node = self.trie.find(parts)
+            if node and node.handler:
+                return node.handler
 
         return self.not_found_handler
 
@@ -52,18 +53,24 @@ class Router:
 
 # Test cases
 
-router = Router("Not Found handler")  # create the router
-router.add_handler("/home/about", "About handler")  # add a route
-router.add_handler("/home/", "Home handler")  # add a route with trailing slash
+populated_router = Router("Not Found handler")  # create the router
+populated_router.add_handler("/home/about", "About handler")  # add a route
+populated_router.add_handler("/home/", "Home handler")  # add a route with trailing slash
 
 # some lookups with the expected output
-print(router.lookup("/"))  # should print 'Not Found handler'
-print(router.lookup("/home"))  # should print 'Home handler'
-print(router.lookup("/home/about"))  # should print 'About handler'
-print(router.lookup("/home/about/"))  # should print 'About handler'
-print(router.lookup("/home///about/"))  # should print 'About handler'
-print(router.lookup("/home/about/me"))  # should print 'Not Found handler'
+print(populated_router.lookup("/"))  # should print 'Not Found handler'
+print(populated_router.lookup("/home"))  # should print 'Home handler'
+print(populated_router.lookup("/home/about"))  # should print 'About handler'
+print(populated_router.lookup("/home/about/"))  # should print 'About handler'
+print(populated_router.lookup("/home///about/"))  # should print 'About handler'
+print(populated_router.lookup("/home/about/me"))  # should print 'Not Found handler'
 
-router.add_handler("/", "Root handler")
-print(router.lookup("/"))  # should print 'Root handler'
-print(router.lookup(""))  # should print 'Root handler'
+populated_router.add_handler("/", "Root handler")
+print(populated_router.lookup("/"))  # should print 'Root handler'
+print(populated_router.lookup(""))  # should print 'Root handler'
+
+# Edge cases
+
+empty_router = Router("Not Found Empty Handler")
+print(empty_router.lookup("/home/about"))  # should print 'Not Found Empty Handler'
+print(empty_router.lookup(None))  # should print 'Not Found Empty Handler'

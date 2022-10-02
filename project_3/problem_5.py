@@ -37,29 +37,39 @@ class Trie:
         return node
 
     def match(self, prefix):
-        node = self.find(prefix)
-        if node:
-            return node.find_words(prefix)
-        else:
-            return []
+        if prefix:
+            node = self.find(prefix)
+
+            if node:
+                return node.find_words(prefix)
+
+        return []
 
 
-MyTrie = Trie()
+populated_trie = Trie()
 wordList = [
     "ant", "anthology", "antagonist", "antonym",
     "fun", "function", "factory",
     "trie", "trigger", "trigonometry", "tripod"
 ]
 for word in wordList:
-    MyTrie.insert(word)
+    populated_trie.insert(word)
 
 # Test cases
-print(MyTrie.match(""))  # Empty prefix - should return everything
-print(MyTrie.match("ant"))
-print(MyTrie.match("anth"))
-print(MyTrie.match("f"))
-print(MyTrie.match("fu"))
-print(MyTrie.match("func"))
-print(MyTrie.match("tri"))
-print(MyTrie.match("trig"))
-print(MyTrie.match("b"))  # Doesn't exist - should return empty list
+print(populated_trie.match(""))  # Empty prefix - should return everything
+print(populated_trie.match("ant"))
+print(populated_trie.match("anth"))
+print(populated_trie.match("f"))
+print(populated_trie.match("fu"))
+print(populated_trie.match("func"))
+print(populated_trie.match("tri"))
+print(populated_trie.match("b"))  # Doesn't exist - should return empty list
+print(populated_trie.match("trig"))
+
+# Edge case
+empty_trie = Trie()
+
+print(empty_trie.match("ant"))
+
+# this condition will work for both empty and populated trie so checking it here will be sufficient.
+print(empty_trie.match(None))

@@ -7,6 +7,9 @@ def rotated_array_search(input_list, number):
     Returns:
        int: Index or -1
     """
+    if not input_list:
+        return -1
+
     _len = len(input_list)
 
     bottom, top, pivot_point = 0, _len, 0
@@ -42,9 +45,11 @@ def rotated_array_search(input_list, number):
 
 
 def linear_search(input_list, number):
-    for index, element in enumerate(input_list):
-        if element == number:
-            return index
+    if input_list:
+        for index, element in enumerate(input_list):
+            if element == number:
+                return index
+
     return -1
 
 
@@ -62,3 +67,5 @@ test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+test_function([[], 10])
+test_function([None, 10])
